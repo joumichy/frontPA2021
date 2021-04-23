@@ -2,8 +2,12 @@
 import {addUser, login} from './Path';
 import axios from 'axios';
 
-async function newSignUpUser(username: string, password: string) {
-  let data = {email: username, password: password};
+async function newSignUpUser(
+  userEmail: string,
+  username: string,
+  password: string,
+) {
+  let data = {email: userEmail, username: username, password: password};
   let result: any;
   try {
     const res = await axios.post(addUser, data);

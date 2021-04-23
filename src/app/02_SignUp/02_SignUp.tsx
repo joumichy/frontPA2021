@@ -7,6 +7,7 @@ import {newSignUpUser} from '../../httprequest/HttpRequest';
 function SignUp({navigation}: any) {
   let initial_data: any;
   const [inseredData, setinseredData] = useState('Inscrivez vous !');
+  const [userEmail, setUserEmail] = useState('');
   const [userName, setUserName] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const [data, setData] = useState(initial_data);
@@ -16,6 +17,10 @@ function SignUp({navigation}: any) {
       <Text>{inseredData}</Text>
       <Input
         placeholder="Adresse Email"
+        onChangeText={text => setUserEmail(text)}
+      />
+      <Input
+        placeholder="Votre nom d'utilisateur"
         onChangeText={text => setUserName(text)}
       />
       <Input
@@ -26,7 +31,7 @@ function SignUp({navigation}: any) {
         title="S'inscrire"
         onPress={() => {
           setinseredData('Bienvenu ' + userName);
-          setData(newSignUpUser(userName, userPassword));
+          setData(newSignUpUser(userEmail, userName, userPassword));
         }}
       />
       <Text>{data}</Text>

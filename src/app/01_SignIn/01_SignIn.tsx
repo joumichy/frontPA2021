@@ -2,7 +2,7 @@ import {Button, Text, View} from 'react-native';
 import React, {Component, useState} from 'react';
 import styles from '../../Style/Style';
 import {Input} from 'react-native-elements';
-import {newSignInUser} from '../../httprequest/HttpRequest';
+import {connect} from "react-redux";
 
 class SignIn extends Component<any, any> {
   navigation = this.props.navigation;
@@ -40,17 +40,23 @@ class SignIn extends Component<any, any> {
         />
         <Button
           title="Se connecter"
-          onPress={async () => {
+          onPress={() => {
             //setinseredData('Bienvenu ' + userName);
             //console.log('Resultat ', data);
-            //Push to menu
-            //navigation.navigate('Menu');
-            let tmpData = await newSignInUser(
+            /*let tmpData = await newSignInUser(
               this.state.username,
               this.state.password,
             );
             console.log('Data :', tmpData);
-            this.setState({data: tmpData.token});
+            this.setState({data: tmpData.token});*/
+            //Push to menu
+            let result = {
+              username: 'John',
+              token: '000000',
+              email: 'john@mail.com',
+            };
+            //this.props.sendUserDataDispatch(result);
+            this.navigation.navigate('Menu');
           }}
         />
 
@@ -61,4 +67,17 @@ class SignIn extends Component<any, any> {
   }
 }
 
-export default SignIn;
+//Creer les actions
+function mapDispatchToProps(dispatch: any) {
+  return {
+    sendUserDataDispatch: () => dispatch({type: 'SEND_USER_DATA'}),
+  };
+}
+
+function mapStateToProps(state: any) {
+  return {
+    userData: state.userData,
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
