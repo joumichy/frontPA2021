@@ -131,7 +131,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.training"
+        applicationId "com.tootsweet.training"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

@@ -1,16 +1,44 @@
 import {Button, Text, View} from 'react-native';
-import React, {Component, useState} from 'react';
+import React, {Component, useEffect} from 'react';
 import styles from '../../Style/Style';
 import {Input} from 'react-native-elements';
-import {connect} from "react-redux";
+import {connect, useSelector} from 'react-redux';
 
-class SignIn extends Component<any, any> {
+interface State {
+  username: string
+  password: string
+  data: any|null
+}
+function SignIn extends Component<any, State> {
   navigation = this.props.navigation;
   state = {
     username: '',
     password: '',
     data: null,
   };
+
+//   const user = useSelector(state1 => state1.user)
+
+  constructor(props: any) {
+    super(props);
+    this.setUserName = this.setUserName.bind(this)
+    this.setUserPassword = this.setUserPassword.bind(this)
+  }
+
+  componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<State>, snapshot?: any) {
+
+    useEffect(() => {
+      fonction1()
+    }, [this.state.username, this.state.password])
+
+    if (prevState.username !== this.state.username) {
+      // fonction1()
+    }
+
+    if (prevState.password !== this.state.password) {
+      // fonction1()
+    }
+  }
 
   setUserName = (username: string) => {
     this.setState({username: username});

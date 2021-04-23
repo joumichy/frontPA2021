@@ -1,13 +1,19 @@
 //import {signIn, signUp} from './Path';
 import {addUser, login} from './Path';
 import axios from 'axios';
+import UserResponse from "../model/UserResponse";
 
 async function newSignUpUser(
   userEmail: string,
   username: string,
   password: string,
-) {
-  let data = {email: userEmail, username: username, password: password};
+) : Promise<UserResponse>{
+
+  let data = {
+    email: userEmail,
+    username,
+    password
+  };
   let result: any;
   try {
     const res = await axios.post(addUser, data);
@@ -22,7 +28,7 @@ async function newSignUpUser(
 //john@hotmail.fr
 //000000
 async function newSignInUser(username: string, password: string) {
-  let data = {email: username, password: password};
+  let data = {email: username, password};
   let result: any;
   try {
     const res = await axios.post(login, data);
