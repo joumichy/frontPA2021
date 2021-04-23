@@ -1,111 +1,62 @@
 import {Button, Text, View} from 'react-native';
-import React, {Component, useEffect} from 'react';
+import React, {Component, useEffect, useState} from 'react';
 import styles from '../../Style/Style';
 import {Input} from 'react-native-elements';
-import {connect, useSelector} from 'react-redux';
+import {connect, useDispatch, useSelector} from 'react-redux';
+import {GlobalState, setUser} from "../../redux";
+import {newSignInUser,} from "../../httprequest/HttpRequest";
+import {ScreenNames} from "../../utils/Utils";
+import User from "../../model/User";
 
-interface State {
-  username: string
-  password: string
-  data: any|null
-}
-function SignIn extends Component<any, State> {
-  navigation = this.props.navigation;
-  state = {
-    username: '',
-    password: '',
-    data: null,
+
+function SignIn(props : any) {
+  const navigation = props.navigation;
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [data, setData] = useState('')
+
+  const dispatch = useDispatch()
+  const onLogin = async (userEmail : string, userPassword: string) => {
+    const res = await newSignInUser(userEmail, userPassword);
+    //console.log("DATA :", res)
+    dispatch(setUser(res.user, res.token))
+    navigation.navigate(ScreenNames.Menu);
   };
 
-//   const user = useSelector(state1 => state1.user)
-
-  constructor(props: any) {
-    super(props);
-    this.setUserName = this.setUserName.bind(this)
-    this.setUserPassword = this.setUserPassword.bind(this)
-  }
-
-  componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<State>, snapshot?: any) {
-
-    useEffect(() => {
-      fonction1()
-    }, [this.state.username, this.state.password])
-
-    if (prevState.username !== this.state.username) {
-      // fonction1()
-    }
-
-    if (prevState.password !== this.state.password) {
-      // fonction1()
-    }
-  }
-
-  setUserName = (username: string) => {
-    this.setState({username: username});
-  };
-  setUserPassword = (password: string) => {
-    this.setState({password: password});
-  };
+  const user = useSelector<GlobalState>(state => state.user)
 
   //john@hotmail.fr
   //000000
-  render() {
-    //let initial_data: any;
-    //const [inseredData, setinseredData] = useState('Bienvenue');
-    //const [userName, setUserName] = useState('');
-    //const [userPassword, setUserPassword] = useState('');
-    //const [data, setData] = useState(initial_data);
     return (
       <View style={styles.center2}>
-        <Text>Bienvenu {this.state.username}</Text>
+        <Text>Bienvenu</Text>
         <Input
-          placeholder="Nom d'utilisateur"
-          onChangeText={text => this.setUserName(text)}
+          textContentType="emailAddress"
+          autoCompleteType="email"
+          placeholder="Adresse Email Utilisateur"
+          onChangeText={text => setUsername(text)}
         />
         <Input
+          secureTextEntry={true}
+          autoCompleteType="password"
           placeholder="Mot de passe"
-          onChangeText={text => this.setUserPassword(text)}
+          onChangeText={text => setPassword(text)}
         />
         <Button
           title="Se connecter"
           onPress={() => {
-            //setinseredData('Bienvenu ' + userName);
-            //console.log('Resultat ', data);
-            /*let tmpData = await newSignInUser(
-              this.state.username,
-              this.state.password,
-            );
-            console.log('Data :', tmpData);
-            this.setState({data: tmpData.token});*/
+            onLogin(username,password)
             //Push to menu
-            let result = {
-              username: 'John',
-              token: '000000',
-              email: 'john@mail.com',
-            };
-            //this.props.sendUserDataDispatch(result);
-            this.navigation.navigate('Menu');
+            //navigation.navigate('Menu');
           }}
         />
-
-        <Button title="Retour" onPress={() => this.navigation.goBack()} />
-        <Text>{this.state.data}</Text>
+        <Button title="Retour" onPress={() => navigation.goBack()} />
+        <Text>{data}</Text>
       </View>
     );
-  }
 }
 
 //Creer les actions
-function mapDispatchToProps(dispatch: any) {
-  return {
-    sendUserDataDispatch: () => dispatch({type: 'SEND_USER_DATA'}),
-  };
-}
 
-function mapStateToProps(state: any) {
-  return {
-    userData: state.userData,
-  };
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
+export default (SignIn);

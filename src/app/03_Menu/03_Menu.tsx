@@ -1,9 +1,11 @@
 import {Button, Text, View} from 'react-native';
 import styles from '../../Style/Style';
 import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import {connect, useSelector} from 'react-redux';
 import {BottomNavigation} from 'react-native-paper';
 import Compte from '../04_Compte/04_Compte';
+import {GlobalState} from "../../redux";
+import User from "../../model/User";
 //import React, {useState} from 'react';
 
 const DashBoardRoute = () => <Text>DashBoard</Text>;
@@ -22,13 +24,14 @@ function Menu(props: any) {
     dashboard: DashBoardRoute,
     parametre: ParametreRoute,
   });
+  const user = useSelector<GlobalState>(state => state.user)
+  const userToken = useSelector<GlobalState>(state => state.token)
+  // @ts-ignore
+  const usernameLoged = user.username;
+
   return (
     <View style={styles.flex}>
-      <Text>Menu</Text>
-      <Text>{props.counter}</Text>
-      <Button title={'Incremente'} onPress={() => props.incrementeDispatch()} />
-      <Button title={'Decremente'} onPress={() => props.decrementeDispatch()} />
-
+      <Text>Bienvenu {usernameLoged}</Text>
       <BottomNavigation
         navigationState={{index, routes}}
         onIndexChange={setIndex}

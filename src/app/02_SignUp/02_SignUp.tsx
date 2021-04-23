@@ -20,6 +20,7 @@ function SignUp({navigation}: any) {
 
   const onPress = async () => {
     const res = await newSignUpUser(userEmail, userName, userPassword);
+    console.log("DATA :", res)
     dispatch(setUser(res.user, res.token))
     navigation.navigate(ScreenNames.SignIn);
   };

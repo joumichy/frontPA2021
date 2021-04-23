@@ -1,7 +1,7 @@
 import {createStore} from 'redux';
 import User from "../model/User";
 
-interface GlobalState {
+export interface GlobalState {
   user?: User,
   token?: string
 }

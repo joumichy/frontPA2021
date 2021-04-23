@@ -1,32 +1,48 @@
 import {Button, View} from 'react-native';
 import {Input} from 'react-native-elements';
-import React from 'react';
+import React, {useState} from 'react';
 import email from 'react-native-email';
+import {useSelector} from "react-redux";
+import {GlobalState} from "../../redux";
 
+//employe3@hotmail.fr
 function Compte() {
+  const [newUserEmail, setNewUserEmail] = useState('');
+
+  const user = useSelector<GlobalState>(state => state.user)
+  const userToken = useSelector<GlobalState>(state => state.token)
+  // @ts-ignore
+  const userEmail = user.email
   return (
     <View>
       <Input
         placeholder="Nom d'utilisateur"
-        onChangeText={text => console.log('...')}
+        onChangeText={text => setNewUserEmail(text)}
       />
       <Button
         title="Ajouter un nouvel utilisateur !"
-        onPress={() => {
-          console.log('Envoie du mail...');
-          sendEmail();
+        onPress={async () => {
+          console.log('Envoie du mail en cours...');
+          sendEmail(newUserEmail);
+          /*const result = await newSecretSignUp(
+            newUserEmail,
+            userEmail,
+            'EMPLOYE',
+            false,
+          );*/
+          //console.log(result);
         }}
       />
     </View>
   );
 }
 
-const sendEmail = () => {
-  const to = ['allou.john@hotmail.fr'];
+const sendEmail = (newUserEmail: string) => {
+  const to = [newUserEmail];
   email(to, {
     cc: ['', ''],
     bcc: '',
-    subject: 'Inscrivez vous Tootsweet !',
+    subject: 'Rejoignez Tootsweet !',
     body:
       'Lien : \n\n https://play.google.com/store/apps/details?id=com.tootsweet',
   }).catch(console.error);

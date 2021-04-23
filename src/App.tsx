@@ -19,11 +19,8 @@ import {ScreenNames} from "./utils/Utils";
 const Stack = createStackNavigator();
 
 
-
-
-class App extends Component<any, any> {
+function App (){
   //La balise Greeting détient en propriété l'attribut "name"
-  render() {
     return (
       <Provider store={store}>
         <NavigationContainer>
@@ -41,7 +38,6 @@ class App extends Component<any, any> {
         </NavigationContainer>
       </Provider>
     );
-  }
 }
 
 export default App;
