@@ -13,18 +13,28 @@ function SignUp({navigation}: any) {
 
   const [inseredData, setinseredData] = useState('Inscrivez vous !');
   const [userEmail, setUserEmail] = useState('');
-  const [userName, setUserName] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [userPassword, setUserPassword] = useState('');
+  const [userPassword2, setUserPassword2] = useState('');
   const [data, setData] = useState(initial_data);
   const dispatch = useDispatch()
 
   const onPress = async () => {
-    const res = await newSignUpUser(userEmail, userName, userPassword);
+    const res = await newSignUpUser(userEmail, firstName, lastName,  userPassword, userPassword2);
     console.log("DATA :", res)
     dispatch(setUser(res.user, res.token))
-    navigation.navigate(ScreenNames.SignIn);
+    //navigation.navigate(ScreenNames.SignIn);
   };
-
+  /*
+    {
+  "email": "example@domain.fr",
+  "password": "valid_Password",
+  "password2": "valid_Password_confirmed",
+  "firstName": "Josh",
+  "lastName": "Nobody"
+}
+   */
   return (
     <View style={styles.center2}>
       <Text>{inseredData}</Text>
@@ -35,14 +45,24 @@ function SignUp({navigation}: any) {
         onChangeText={text => setUserEmail(text)}
       />
       <Input
-        placeholder="Votre nom d'utilisateur"
-        onChangeText={text => setUserName(text)}
+        placeholder="Nom"
+        onChangeText={text => setLastName(text)}
+      />
+      <Input
+        placeholder="Prénom"
+        onChangeText={text => setFirstName(text)}
       />
       <Input
         placeholder="Mot de passe"
         autoCompleteType="password"
         textContentType="newPassword"
         onChangeText={text => setUserPassword(text)}
+      />
+      <Input
+        placeholder="Confirmer votre mot de passe"
+        autoCompleteType="password"
+        textContentType="newPassword"
+        onChangeText={text => setUserPassword2(text)}
       />
       <Button title="S'inscrire" onPress={onPress} />
       <Text>{data}</Text>

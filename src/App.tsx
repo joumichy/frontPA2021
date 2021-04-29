@@ -9,14 +9,17 @@ import SignUp from './app/02_SignUp/02_SignUp';
 import Menu from './app/03_Menu/03_Menu';
 //Styles
 import styles from './Style/Style';
-import {Provider} from 'react-redux';
+import {Provider, useDispatch} from 'react-redux';
 import {createStore} from 'redux';
 import Compte from './app/04_Compte/04_Compte';
-import store from "./redux";
+import store, {setToken} from "./redux";
 import {ScreenNames} from "./utils/Utils";
+import {retrieveData, STORAGE_KEY_TOKEN} from "./utils/Storage";
+import {Loader} from "./app/00_Loader/00_Loader";
 
 //Balise mère
 const Stack = createStackNavigator();
+
 
 
 function App (){
@@ -25,6 +28,11 @@ function App (){
       <Provider store={store}>
         <NavigationContainer>
           <Stack.Navigator>
+            <Stack.Screen
+              name="Loading"
+              component={Loader}
+              options={{title: 'Loader'}}
+            />
             <Stack.Screen
               name="Accueil"
               component={MainScreen}

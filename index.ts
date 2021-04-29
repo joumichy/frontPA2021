@@ -5,6 +5,11 @@
 import {AppRegistry} from 'react-native';
 
 import App from './src/App';
-import {name as appName} from './app.json';
+import {retrieveData, STORAGE_KEY_TOKEN} from "./src/utils/Storage";
+import {useDispatch} from "react-redux";
+import {setToken, setUser} from "./src/redux";
 
-AppRegistry.registerComponent(appName, () => App);
+
+AppRegistry.registerComponent('training', () => App);
+
+//init()

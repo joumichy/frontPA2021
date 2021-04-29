@@ -1,18 +1,26 @@
-import {Button, View} from 'react-native';
+import {Button, Linking, Text, TouchableOpacity, View} from 'react-native';
 import {Input} from 'react-native-elements';
 import React, {useState} from 'react';
 import email from 'react-native-email';
 import {useSelector} from "react-redux";
 import {GlobalState} from "../../redux";
+import {inviteUser} from "../../httprequest/HttpRequest";
+import styles from "../../Style/Style";
 
-//employe3@hotmail.fr
-function Compte() {
+//const user = useSelector<GlobalState>(state => state.user)
+
+function Compte(props : any) {
   const [newUserEmail, setNewUserEmail] = useState('');
 
-  const user = useSelector<GlobalState>(state => state.user)
-  const userToken = useSelector<GlobalState>(state => state.token)
+  //const user = useSelector<GlobalState>(state => state.user || null)
+  const userToken = useSelector<GlobalState>(state => state.token) || null
   // @ts-ignore
-  const userEmail = user.email
+  //const userEmail = user.email || "Aucune donnée"
+  const onSuccess = e => {
+    Linking.openURL(e.data).catch(err =>
+      console.error('An error occured', err)
+    );
+  }
   return (
     <View>
       <Input
@@ -23,18 +31,23 @@ function Compte() {
         title="Ajouter un nouvel utilisateur !"
         onPress={async () => {
           console.log('Envoie du mail en cours...');
-          sendEmail(newUserEmail);
-          /*const result = await newSecretSignUp(
-            newUserEmail,
-            userEmail,
-            'EMPLOYE',
-            false,
-          );*/
-          //console.log(result);
+          const res = await inviteUser(newUserEmail, userToken);
+          console.log("Resulat : ", res);
         }}
       />
+      <TouchableOpacity
+        style={styles.button}
+        onPress={async () => {
+          console.log('Reconnaissance QRCODE...');
+
+        }}>
+        <Text>QRCODE</Text>
+      </TouchableOpacity>
+
+
     </View>
   );
+
 }
 
 const sendEmail = (newUserEmail: string) => {

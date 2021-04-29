@@ -2,6 +2,8 @@ import {Button, Text, View} from 'react-native';
 import React from 'react';
 import styles from '../../Style/Style';
 import {ScreenNames} from "../../utils/Utils";
+import {retrieveData} from "../../utils/Storage";
+
 
 function MainScreen({navigation}: any) {
   return (

@@ -1,28 +1,14 @@
 //path
-const local = 'https://f8d4ca9a4253.ngrok.io/serveur/PA2021';
+const local = 'https://411aacab68a8.ngrok.io';
 
-const signIn = local + '/login';
-const signUp = local + '/adduser';
-
-const getUser = local + '/getUser';
-const exemple = 'https://reactnative.dev/movies.json';
-
-const exemple1 = 'https://jsonplaceholder.typicode.com/todos/1';
-const exemplePost = 'https://jsonplaceholder.typicode.com/posts/1';
+const signIn = local + '/signin';
+const signUp = local + '/signup';
+const invite = local + '/invite';
 
 //Marc
-const localMarc = 'http://localhost//serveur/PA2021';
-const addUser = local + '/adduser';
-const login = local + '/login';
 export {
   local,
-  getUser,
+  invite,
   signIn,
   signUp,
-  exemple,
-  exemple1,
-  exemplePost,
-  localMarc,
-  addUser,
-  login,
 };

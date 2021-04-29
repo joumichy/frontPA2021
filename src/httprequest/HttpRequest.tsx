@@ -1,22 +1,26 @@
-//import {signIn, signUp} from './Path';
-import {addUser, login} from './Path';
+import {invite, signIn, signUp} from './Path';
 import axios from 'axios';
 import UserResponse from "../model/UserResponse";
 
+
 async function newSignUpUser(
-  userEmail: string,
-  username: string,
+  email: string,
+  firstName: string,
+  lastName : string,
   password: string,
+  password2: string,
 ) : Promise<UserResponse>{
 
   let data = {
-    email: userEmail,
-    username,
-    password
+    email,
+    firstName,
+    lastName,
+    password,
+    password2
   };
   let result: any;
   try {
-    const res = await axios.post(addUser, data);
+    const res = await axios.post(signUp, data);
     console.log('Message : ', res.data);
     return res.data;
   } catch (err) {
@@ -25,13 +29,12 @@ async function newSignUpUser(
   }
 }
 
-//john@hotmail.fr
-//000000
+
 async function newSignInUser(username: string, password: string) {
   let data = {email: username, password};
   let result: any;
   try {
-    const res = await axios.post(login, data);
+    const res = await axios.post(signIn, data,{});
     //console.log('Message : ', res.data);
     return res.data;
   } catch (err) {
@@ -41,4 +44,19 @@ async function newSignInUser(username: string, password: string) {
   }
 }
 
-export {newSignUpUser, newSignInUser};
+async function inviteUser(email: string, token: unknown){
+  let data = {email}
+  const headers = {
+    'Content-Type': 'application/json',
+    'Authorization': token
+  }
+  try{
+    const res = await axios.post(invite, data, {headers} );
+    return res.data;
+  }catch (err){
+    console.log("Erreur : ", err.message);
+    return err;
+  }
+}
+
+export {newSignUpUser, newSignInUser, inviteUser};

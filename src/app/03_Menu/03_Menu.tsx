@@ -6,28 +6,33 @@ import {BottomNavigation} from 'react-native-paper';
 import Compte from '../04_Compte/04_Compte';
 import {GlobalState} from "../../redux";
 import User from "../../model/User";
+import {retrieveData} from "../../utils/Storage";
+import Dashboard from "../05_Dashboard/Dashboard";
 //import React, {useState} from 'react';
 
-const DashBoardRoute = () => <Text>DashBoard</Text>;
+
 
 const ParametreRoute = () => <Text>Parametre</Text>;
+
+//const storedToken = async () => { const res = await retrieveData('token'); console.log("Resultat Token :", res)}
 
 function Menu(props: any) {
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
-    {key: 'compte', title: '04_Compte', icon: 'account-circle'},
+    {key: 'compte', title: 'Compte', icon: 'account-circle'},
     {key: 'dashboard', title: 'Dashboard', icon: 'chart-arc'},
     {key: 'parametre', title: 'Parametre', icon: 'cog-outline'},
   ]);
   const renderScene = BottomNavigation.SceneMap({
     compte: Compte,
-    dashboard: DashBoardRoute,
+    dashboard: Dashboard,
     parametre: ParametreRoute,
   });
   const user = useSelector<GlobalState>(state => state.user)
-  const userToken = useSelector<GlobalState>(state => state.token)
+  //const userToken = useSelector<GlobalState>(state => state.token)
   // @ts-ignore
-  const usernameLoged = user.username;
+  const usernameLoged = user.email || 'User vide';
+  //storedToken()
 
   return (
     <View style={styles.flex}>
@@ -41,17 +46,4 @@ function Menu(props: any) {
   );
 }
 
-function mapStateToProps(state: any) {
-  return {
-    counter: state.counter,
-  };
-}
-
-//Creer les actions
-function mapDispatchToProps(dispatch: any) {
-  return {
-    incrementeDispatch: () => dispatch({type: 'INCREMENTE'}),
-    decrementeDispatch: () => dispatch({type: 'DECREMENTE'}),
-  };
-}
-export default connect(mapStateToProps, mapDispatchToProps)(Menu);
+export default Menu;

@@ -18,8 +18,9 @@ function SignIn(props : any) {
   const dispatch = useDispatch()
   const onLogin = async (userEmail : string, userPassword: string) => {
     const res = await newSignInUser(userEmail, userPassword);
-    //console.log("DATA :", res)
-    dispatch(setUser(res.user, res.token))
+    console.log("DATA :", res)
+    console.log("token :", res.payload.token)
+    dispatch(setUser(res.payload.user, res.payload.token))
     navigation.navigate(ScreenNames.Menu);
   };
 
