@@ -16,6 +16,9 @@ import store, {setToken} from "./redux";
 import {ScreenNames} from "./utils/Utils";
 import {retrieveData, STORAGE_KEY_TOKEN} from "./utils/Storage";
 import {Loader} from "./app/00_Loader/00_Loader";
+import QrCode from "./app/06_QrCode/QrCode";
+import Dashboard from "./app/05_Dashboard/Dashboard";
+import Parametre from "./app/07_Parametre/Parametre";
 
 //Balise mère
 const Stack = createStackNavigator();
@@ -29,19 +32,22 @@ function App (){
         <NavigationContainer>
           <Stack.Navigator>
             <Stack.Screen
-              name="Loading"
+              name={ScreenNames.Loader}
               component={Loader}
-              options={{title: 'Loader'}}
+              options={{title: ScreenNames.Loader}}
             />
             <Stack.Screen
-              name="Accueil"
+              name= {ScreenNames.Accueil}
               component={MainScreen}
-              options={{title: 'Acceuil'}}
+              options={{title: ScreenNames.Accueil}}
             />
             <Stack.Screen name={ScreenNames.SignIn} component={SignIn} />
             <Stack.Screen name={ScreenNames.SignUp}  component={SignUp} />
             <Stack.Screen name={ScreenNames.Menu}  component={Menu} />
-            <Stack.Screen name={ScreenNames.Compte}  component={Compte} />
+            <Stack.Screen name={ScreenNames.Compte}  component={Compte}/>
+            <Stack.Screen name={ScreenNames.QrCode}  component={QrCode}/>
+            <Stack.Screen name={ScreenNames.Dashboard}  component={Dashboard}/>
+            <Stack.Screen name={ScreenNames.Parametre}  component={Parametre}/>
           </Stack.Navigator>
         </NavigationContainer>
       </Provider>

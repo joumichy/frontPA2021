@@ -8,35 +8,55 @@ import {GlobalState} from "../../redux";
 import User from "../../model/User";
 import {retrieveData} from "../../utils/Storage";
 import Dashboard from "../05_Dashboard/Dashboard";
+import Parametre from "../07_Parametre/Parametre";
+import {ScreenNames} from "../../utils/Utils";
 //import React, {useState} from 'react';
 
 
 
-const ParametreRoute = () => <Text>Parametre</Text>;
 
 //const storedToken = async () => { const res = await retrieveData('token'); console.log("Resultat Token :", res)}
 
 function Menu(props: any) {
+  const navigation = props.navigation;
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
-    {key: 'compte', title: 'Compte', icon: 'account-circle'},
-    {key: 'dashboard', title: 'Dashboard', icon: 'chart-arc'},
-    {key: 'parametre', title: 'Parametre', icon: 'cog-outline'},
+    {key: ScreenNames.Compte, title: ScreenNames.Compte, icon: 'account-circle'},
+    {key: ScreenNames.Dashboard, title: ScreenNames.Dashboard, icon: 'chart-arc'},
+    {key: ScreenNames.Parametre , title: ScreenNames.Parametre, icon: 'cog-outline'},
   ]);
-  const renderScene = BottomNavigation.SceneMap({
-    compte: Compte,
-    dashboard: Dashboard,
-    parametre: ParametreRoute,
-  });
+  // const renderScene = BottomNavigation.SceneMap({
+  //   compte: Compte,
+  //   dashboard: Dashboard,
+  //   parametre: Parametre,
+  // });
+
+  const renderScene = ({ route, jumpTo } : any) => {
+    switch (route.key) {
+      case ScreenNames.Compte:
+        return <Compte jumpTo={jumpTo} navigation={navigation} />;
+      case ScreenNames.Dashboard:
+        return <Dashboard/>;
+      case ScreenNames.Parametre:
+        return <Parametre/>;
+    }
+  }
   const user = useSelector<GlobalState>(state => state.user)
   //const userToken = useSelector<GlobalState>(state => state.token)
-  // @ts-ignore
-  const usernameLoged = user.email || 'User vide';
+  let usernameLoged : unknown;
+  try{
+    // @ts-ignore
+    usernameLoged = user.email;
+  }catch (e){
+    usernameLoged = 'UserVide'
+  }
+
   //storedToken()
 
   return (
     <View style={styles.flex}>
       <Text>Bienvenu {usernameLoged}</Text>
+      <Button title="Click" onPress={() => console.log("Result", props)} />
       <BottomNavigation
         navigationState={{index, routes}}
         onIndexChange={setIndex}

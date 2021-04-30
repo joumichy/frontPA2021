@@ -6,11 +6,13 @@ import {useSelector} from "react-redux";
 import {GlobalState} from "../../redux";
 import {inviteUser} from "../../httprequest/HttpRequest";
 import styles from "../../Style/Style";
+import {ScreenNames} from "../../utils/Utils";
 
 //const user = useSelector<GlobalState>(state => state.user)
 
 function Compte(props : any) {
   const [newUserEmail, setNewUserEmail] = useState('');
+  const navigation = props.navigation
 
   //const user = useSelector<GlobalState>(state => state.user || null)
   const userToken = useSelector<GlobalState>(state => state.token) || null
@@ -37,8 +39,9 @@ function Compte(props : any) {
       />
       <TouchableOpacity
         style={styles.button}
-        onPress={async () => {
-          console.log('Reconnaissance QRCODE...');
+        onPress={ () => {
+          console.log('RESULT COMPTE', props);
+          navigation.navigate(ScreenNames.QrCode);
 
         }}>
         <Text>QRCODE</Text>
