@@ -4,8 +4,8 @@ import styles from '../../Style/Style';
 import {Input} from 'react-native-elements';
 import {connect, useDispatch, useSelector} from 'react-redux';
 import {GlobalState, setUser} from "../../redux";
-import {newSignInUser,} from "../../httprequest/HttpRequest";
 import {ScreenNames} from "../../utils/Utils";
+import newSignInUser from "./api";
 
 function SignIn(props: any) {
 

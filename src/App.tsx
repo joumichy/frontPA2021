@@ -8,10 +8,10 @@ import {Provider} from 'react-redux';
 import Compte from './app/04_Compte/04_Compte';
 import store from "./redux";
 import {ScreenNames} from "./utils/Utils";
-import {SplashScreen} from "./app/00_SplashScreen/SplashScreen";
 import QrCode from "./app/06_QrCode/QrCode";
 import Dashboard from "./app/05_Dashboard/Dashboard";
 import Parametre from "./app/07_Parametre/Parametre";
+import {SplashScreen} from "./app/00_SplashScreen/SplashScreen";
 
 const Stack = createStackNavigator();
 

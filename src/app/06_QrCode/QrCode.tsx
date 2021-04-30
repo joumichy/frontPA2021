@@ -6,8 +6,9 @@ import QRCodeScanner from "react-native-qrcode-scanner";
 
 function QrCode() {
 
+  let dataQrCode : string;
   const onSuccess = (e:BarCodeReadEvent) => {
-    
+    dataQrCode = e.data
   };
 
   return (

@@ -34,7 +34,6 @@ function Menu(props: any) {
   return (
     <View style={styles.flex}>
       <Text>Bienvenue, {user ? user.email : ""}</Text>
-      <Button title="Click" onPress={() => console.log("Result", props)} />
       <BottomNavigation
         navigationState={{index, routes}}
         onIndexChange={setIndex}

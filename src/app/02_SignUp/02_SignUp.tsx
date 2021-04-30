@@ -2,9 +2,9 @@ import {Button, Text, View} from 'react-native';
 import React, {useState} from 'react';
 import styles from '../../Style/Style';
 import {Input} from 'react-native-elements';
-import {newSignUpUser} from '../../httprequest/HttpRequest';
 import {useDispatch} from "react-redux";
 import {setUser} from "../../redux";
+import newSignUpUser from "./api";
 
 function SignUp({navigation}: any) {
 

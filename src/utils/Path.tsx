@@ -5,7 +5,6 @@ const signIn = local + '/signin';
 const signUp = local + '/signup';
 const invite = local + '/invite';
 
-//Marc
 export {
   local,
   invite,
