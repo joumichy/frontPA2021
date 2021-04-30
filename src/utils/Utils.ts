@@ -6,9 +6,11 @@ export const ScreenNames = {
   Dashboard: 'Dashboard',
   Compte: 'Compte',
   Parametre: 'Parametre',
-  Loader : 'Loader',
+  SplashScreen : 'SplashScreen',
   QrCode : 'QrCode',
 }
+
 export const KEY = {
-  User: 'user'
+  User: 'user',
+  Title: 'training'
 }

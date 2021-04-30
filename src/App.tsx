@@ -12,30 +12,7 @@ import QrCode from "./app/06_QrCode/QrCode";
 import Dashboard from "./app/05_Dashboard/Dashboard";
 import Parametre from "./app/07_Parametre/Parametre";
 import {SplashScreen} from "./app/00_SplashScreen/SplashScreen";
+import styles from "./Style/Style";
+import {Text, View} from "react-native";
 
 const Stack = createStackNavigator();
-
-function App () {
-    return (
-      <Provider store={store}>
-        <NavigationContainer>
-          <Stack.Navigator>
-            <Stack.Screen
-              name={ScreenNames.Loader}
-              component={SplashScreen}
-              options={{title: ScreenNames.Loader}}
-            />
-            <Stack.Screen name={ScreenNames.SignIn} component={SignIn} />
-            <Stack.Screen name={ScreenNames.SignUp}  component={SignUp} />
-            <Stack.Screen name={ScreenNames.Menu}  component={Menu} />
-            <Stack.Screen name={ScreenNames.Compte}  component={Compte}/>
-            <Stack.Screen name={ScreenNames.QrCode}  component={QrCode}/>
-            <Stack.Screen name={ScreenNames.Dashboard}  component={Dashboard}/>
-            <Stack.Screen name={ScreenNames.Parametre}  component={Parametre}/>
-          </Stack.Navigator>
-        </NavigationContainer>
-      </Provider>
-    );
-}
-
-export default App;
