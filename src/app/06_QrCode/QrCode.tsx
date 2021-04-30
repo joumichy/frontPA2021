@@ -1,18 +1,15 @@
 import {Linking, Text, TouchableOpacity, View} from "react-native";
 import React from 'react';
-import {RNCamera} from "react-native-camera";
+import {BarCodeReadEvent, RNCamera} from "react-native-camera";
 import styles from "../../Style/Style";
 import QRCodeScanner from "react-native-qrcode-scanner";
 
 function QrCode() {
-  //Parser la string
-  const onSuccess = (e:any) => {
-    /*
-    Linking.openURL(e.data).catch(err =>
-      console.error('An error occured', err)
-    );*/
-    console.log("qrcode", e)
+
+  const onSuccess = (e:BarCodeReadEvent) => {
+    
   };
+
   return (
     <View>
       <Text>QrCode</Text>
@@ -21,9 +18,7 @@ function QrCode() {
         vibrate={false}
         topContent={
           <Text style={styles.centerText}>
-            Go to{' '}
-            <Text style={styles.textBold}>wikipedia.org/wiki/QR_code</Text> on
-            your computer and scan the QR code.
+            Go to{' '}<Text style={styles.textBold}>wikipedia.org/wiki/QR_code</Text> on your computer and scan the QR code.
           </Text>
         }
         bottomContent={

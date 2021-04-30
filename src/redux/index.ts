@@ -1,6 +1,5 @@
 import {createStore} from 'redux';
 import User from "../model/User";
-import { AsyncStorage } from "react-native";
 import {storeData} from "../utils/Storage";
 import UserResponse from "../model/UserResponse";
 import {KEY} from "../utils/Utils";

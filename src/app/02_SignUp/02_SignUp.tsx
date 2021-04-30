@@ -5,7 +5,6 @@ import {Input} from 'react-native-elements';
 import {newSignUpUser} from '../../httprequest/HttpRequest';
 import {useDispatch} from "react-redux";
 import {setUser} from "../../redux";
-import {ScreenNames} from "../../utils/Utils";
 
 function SignUp({navigation}: any) {
 
@@ -24,17 +23,8 @@ function SignUp({navigation}: any) {
     const res = await newSignUpUser(userEmail, firstName, lastName,  userPassword, userPassword2);
     console.log("DATA :", res)
     dispatch(setUser(res.user, res.token))
-    //navigation.navigate(ScreenNames.SignIn);
   };
-  /*
-    {
-  "email": "example@domain.fr",
-  "password": "valid_Password",
-  "password2": "valid_Password_confirmed",
-  "firstName": "Josh",
-  "lastName": "Nobody"
-}
-   */
+
   return (
     <View style={styles.center2}>
       <Text>{inseredData}</Text>
