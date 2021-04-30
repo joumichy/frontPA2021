@@ -21,4 +21,14 @@ function RegisterComponents(){
   Navigation.registerComponent(ScreenNames.Dashboard, () => ReduxHOC(Dashboard))
   Navigation.registerComponent(ScreenNames.QrCode, () => ReduxHOC(QrCode))
 }
+
+export class Navigator{
+
+  static goTo(name : string){
+
+  }
+  static goToTab(name : string){
+
+  }
+}
 export  {RegisterComponents}
