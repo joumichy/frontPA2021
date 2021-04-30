@@ -1,5 +1,5 @@
 import {Linking, Text, TouchableOpacity, View} from "react-native";
-import React from "react";
+import React from 'react';
 import {RNCamera} from "react-native-camera";
 import styles from "../../Style/Style";
 import QRCodeScanner from "react-native-qrcode-scanner";
@@ -7,16 +7,18 @@ import QRCodeScanner from "react-native-qrcode-scanner";
 function QrCode() {
   //Parser la string
   const onSuccess = (e:any) => {
+    /*
     Linking.openURL(e.data).catch(err =>
       console.error('An error occured', err)
-    );
+    );*/
+    console.log("qrcode", e)
   };
   return (
     <View>
       <Text>QrCode</Text>
       <QRCodeScanner
         onRead={onSuccess}
-
+        vibrate={false}
         topContent={
           <Text style={styles.centerText}>
             Go to{' '}

@@ -1,5 +1,5 @@
 //path
-const local = 'https://6aec479dc5a8.ngrok.io';
+const local = 'https://19fb7419e4d8.ngrok.io';
 
 const signIn = local + '/signin';
 const signUp = local + '/signup';

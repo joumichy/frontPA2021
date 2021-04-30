@@ -51,6 +51,14 @@ function SignIn(props : any) {
             //navigation.navigate('Menu');
           }}
         />
+        <Button
+          title="S'inscrire"
+          onPress={() => {
+            //onLogin(username,password)
+            //Push to menu
+            navigation.navigate(ScreenNames.SignUp);
+          }}
+        />
         <Button title="Retour" onPress={() => navigation.goBack()} />
         <Text>{data}</Text>
       </View>
